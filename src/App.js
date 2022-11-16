@@ -10,6 +10,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload. 
           Ar tikrai?
           A?
+          A?
         </p>
       </header>
     </div>
