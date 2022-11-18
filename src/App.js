@@ -32,25 +32,35 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        
         <Route path='/' element={<PageLayout email={email} password={password} onLogout={handleLogout} /> }>
           <Route index element={
             <RouteSuspense>
               <Home />
             </RouteSuspense>
           } />
+          
           <Route path='/add' element={
             <RouteSuspense>
               <Add />
             </RouteSuspense>
           } />
+
+          <Route path='/home' element={
+            <RouteSuspense>
+              <Home />
+            </RouteSuspense>
+          } />
+
         </Route>
-        <Route>
-          <Route path='/login' element={
+
+         <Route path='/login' element={
             <RouteSuspense>
               <Login onLogin={handleLogin} />
             </RouteSuspense>
           } />
-        </Route>
+
+
         <Route>
           <Route path='/register' element={
             <RouteSuspense>
@@ -58,6 +68,7 @@ function App() {
             </RouteSuspense>
           } />
         </Route>
+
       </Routes>
     </div>
   );

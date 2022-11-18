@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { Navigation } from '../../components/Navigation/Navigation';
 import { BASE_URL } from '../../utils/constants'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const Register = ({ onRegister }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [registerError, setRegisterError] = useState('');
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handleRegister = (e) => {
       e.preventDefault();
@@ -30,8 +30,7 @@ const Register = ({ onRegister }) => {
         if (data.err) {
           setRegisterError(data.err);
         } else {
-          localStorage.setItem("token", data.tokenValue);
-          navigate('/login');
+            // navigate('/login');
         }})}
 
         const handleEmailChange = (e) => setEmail(e.target.value);
@@ -50,7 +49,7 @@ const Register = ({ onRegister }) => {
             <input type="password" placeholder='Password' onChange={handlePasswordChange}/>
             <button type='submit' >Register</button>
         </form>
-        <h3>After succesful registration you will be automatically rerouted to login page</h3>
+        <h3>After succesful registration you will be automatically redirected to login page</h3>
         </>
         
     )
