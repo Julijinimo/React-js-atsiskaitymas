@@ -1,55 +1,122 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { RouteSuspense } from './components/RouteSuspense/RouteSuspense';
 import { PageLayout } from './components/PageLayout/PageLayout';
-// import { Route } from './components/Route/Route';
-// import HomePage from './views/HomePage/HomePage';
-// import ContactsPage from './views/ContactsPage/ContactsPage';
-// import AboutPage from './views/AboutPage/AboutPage';
+import { RouteSuspense } from './components/RouteSuspense/RouteSuspense';
 
 import './App.css';
 
-const HomePage = React.lazy(() => import('./views/Home/Home'));
-const ContactsPage = React.lazy(() => import('./views/Add/Add'));
-const AboutPage = React.lazy(() => import('./views/Login/Login'));
-const LoginPage = React.lazy(() => import('./views/Register/Register'));
+const Login = React.lazy(() => import('./views/Login/Login'));
+const Register = React.lazy(() => import('./views/Register/Register'));
+const Home = React.lazy(() => import('./views/Home/Home'));
+const Add = React.lazy(() => import('./views/Add/Add'));
+
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
-  const handleLogin = (username) => setUser({ username });
+  const handleLogin = (email, password) => {
+    setEmail({ email: email });
+    setPassword({ password: password })
+  };
+  const handleLogout = () => {
+    setEmail(null);
+    setPassword(null)
+  };
+  const handleRegister = (email, password) => {
+    setEmail({ email: email });
+    setPassword({ password: password })
+  }
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<PageLayout user={user} />}>
+        <Route path='/' element={<PageLayout email={email} password={password} onLogout={handleLogout} /> }>
           <Route index element={
             <RouteSuspense>
               <Home />
             </RouteSuspense>
           } />
-          <Route path="/add" element={
+          <Route path='/add' element={
             <RouteSuspense>
               <Add />
             </RouteSuspense>
           } />
-          <Route path="/about" element={
+        </Route>
+        <Route>
+          <Route path='/login' element={
             <RouteSuspense>
-              <AboutPage />
+              <Login onLogin={handleLogin} />
             </RouteSuspense>
           } />
         </Route>
-        <Route path="/login" element={
-          <RouteSuspense>
-            <LoginPage onLogin={handleLogin} />
-          </RouteSuspense>
-        } />
+        <Route>
+          <Route path='/register' element={
+            <RouteSuspense>
+              <Register onRegister={handleRegister}/>
+            </RouteSuspense>
+          } />
+        </Route>
       </Routes>
     </div>
   );
 }
 
 export default App;
+
+// import React, { useState } from 'react';
+// import { Routes, Route } from 'react-router-dom';
+// import { RouteSuspense } from './components/RouteSuspense/RouteSuspense';
+// import { PageLayout } from './components/PageLayout/PageLayout';
+// // import { Route } from './components/Route/Route';
+// // import HomePage from './views/HomePage/HomePage';
+// // import ContactsPage from './views/ContactsPage/ContactsPage';
+// // import AboutPage from './views/AboutPage/AboutPage';
+
+// import './App.css';
+
+// const HomePage = React.lazy(() => import('./views/Home/Home'));
+// const ContactsPage = React.lazy(() => import('./views/Add/Add'));
+// const AboutPage = React.lazy(() => import('./views/Login/Login'));
+// const LoginPage = React.lazy(() => import('./views/Register/Register'));
+
+// function App() {
+//   const [user, setUser] = useState(null);
+
+//   const handleLogin = (username) => setUser({ username });
+
+//   return (
+//     <div className="App">
+//       <Routes>
+//         <Route path="/" element={<PageLayout user={user} />}>
+//           <Route index element={
+//             <RouteSuspense>
+//               <Home />
+//             </RouteSuspense>
+//           } />
+//           <Route path="/add" element={
+//             <RouteSuspense>
+//               <Add />
+//             </RouteSuspense>
+//           } />
+//           <Route path="/about" element={
+//             <RouteSuspense>
+//               <AboutPage />
+//             </RouteSuspense>
+//           } />
+//         </Route>
+//         <Route path="/login" element={
+//           <RouteSuspense>
+//             <LoginPage onLogin={handleLogin} />
+//           </RouteSuspense>
+//         } />
+//       </Routes>
+//     </div>
+//   );
+// }
+
+// export default App;
 
 // import React, { useEffect } from 'react';
 // import { BASE_URL } from './utils/constants';

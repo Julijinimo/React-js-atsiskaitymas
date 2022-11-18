@@ -1,12 +1,12 @@
-// import styles from './contacts-page.module.scss';
+import './home.css';
 
-const ContactsPage = () => {
+const Home = () => {
     return (
         <div>
-            <h1 className={styles.title}>Contacts page</h1>
+            <h1 className='home' >Welcome to React atsiskaitymas!</h1>
             <button>Contact</button>
         </div>
     )
-}
+};
 
-export default ContactsPage;
+export default Home;
