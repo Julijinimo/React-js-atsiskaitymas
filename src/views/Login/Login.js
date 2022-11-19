@@ -10,10 +10,10 @@ const Login = ({ onLogin }) => {
 
     const navigate = useNavigate();
 
-    const handleRegister = (e) => {
+    const handleLogin = (e) => {
       e.preventDefault();
-      onLogin(email);
-      onLogin(password);
+        onLogin(email);
+        onLogin(password);
       fetch(BASE_URL + '/auth/login', {
         method: 'POST',
         headers: {
@@ -31,7 +31,7 @@ const Login = ({ onLogin }) => {
           setRegisterError(data.err);
         } else {
           localStorage.setItem("token", data.token);
-          navigate('/');
+          navigate('/home');
         }})}
 
         const handleEmailChange = (e) => setEmail(e.target.value);
@@ -45,7 +45,7 @@ const Login = ({ onLogin }) => {
         <h1>
             Login Page
         </h1>
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleLogin}>
             <input type="email" placeholder='Email' onChange={handleEmailChange}/>
             <input type="password" placeholder='Password' onChange={handlePasswordChange}/>
             <button type='submit' >Login</button>

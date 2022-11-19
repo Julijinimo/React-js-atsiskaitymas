@@ -7,6 +7,8 @@ const Register = ({ onRegister }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [registerError, setRegisterError] = useState('');
+    // const [success, successMessage] = useState('');
+
 
     // const navigate = useNavigate();
 
@@ -26,11 +28,11 @@ const Register = ({ onRegister }) => {
       })
       .then(res => res.json())
       .then(data => {
-        // console.log(data);
+        console.log(data);
         if (data.err) {
           setRegisterError(data.err);
         } else {
-            // navigate('/login');
+          // successMessage(response.status)
         }})}
 
         const handleEmailChange = (e) => setEmail(e.target.value);
@@ -40,6 +42,7 @@ const Register = ({ onRegister }) => {
     return (
         <>
         <Navigation />
+        {/* {success && <h2>succesful registration</h2>} */}
         {registerError && <h2>Error: {registerError}</h2>}
         <h1>
             Register Page
