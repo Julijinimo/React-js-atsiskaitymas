@@ -3,6 +3,7 @@ import { BASE_URL } from '../../utils/constants'
 
 const Add = ({ onAdd }) => {
     const [add, setAdd] = useState([]);
+    const [skills, setSkills] = useState('');
     const [addError, setAddError] = useState('');
     const token = localStorage.getItem("token");
 
@@ -15,8 +16,9 @@ const Add = ({ onAdd }) => {
           'Content-type': 'application/json',
           Authorization: 'Bearer ' + token,
         },
-        body: JSON.stringify(
-          [add],
+        body: JSON.stringify({
+          
+        }
         )
       })
       .then(res => res.json())
@@ -28,7 +30,7 @@ const Add = ({ onAdd }) => {
  
         }})}
 
-        const handleTextChange = (e) => setAdd(e.target.value);
+        const handleTextChange = (e) => setSkills(e.target.value);
 
 
     return (
@@ -40,7 +42,13 @@ const Add = ({ onAdd }) => {
         <form onSubmit={handleAdd}>
             <label>Input text</label> <br></br>
             <input type="text" placeholder='Text area' onChange={handleTextChange}/>
-            <button type='submit' >Add</button>
+            <button type='submit' onClick={() => {
+              setSkills('')
+              setAdd([
+                ...add,
+                [skills]
+              ])
+            }} >Add</button>
         </form>
         </>
         
