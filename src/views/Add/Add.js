@@ -2,43 +2,44 @@ import { useState } from 'react';
 import { BASE_URL } from '../../utils/constants'
 
 const Add = ({ onAdd }) => {
-    const [email, setEmail] = useState('');
-    const [registerError, setRegisterError] = useState('');
+    const [token, setAdd] = useState('');
+    const [addError, setAddError] = useState('');
+    const token = localStorage.getItem("token");
 
 
-    const handleRegister = (e) => {
+    const handleAdd = (e) => {
       e.preventDefault();
-        onAdd(email);
+        // onAdd(token);
       fetch(BASE_URL + '/auth/register', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json'
         },
         body: JSON.stringify({
-          email: email, 
+          token: token, 
         })
       })
       .then(res => res.json())
       .then(data => {
         // console.log(data);
         if (data.err) {
-          setRegisterError(data.err);
+          setAddError(data.err);
         } else {
  
         }})}
 
-        const handleEmailChange = (e) => setEmail(e.target.value);
+        const handleTextChange = (e) => setAdd(e.target.value);
 
 
     return (
         <>
-        {registerError && <h2>Error: {registerError}</h2>}
+        {addError && <h2>Error: {addError}</h2>}
         <h1>
             Add Page
         </h1>
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleAdd}>
             <label>Input text</label> <br></br>
-            <input type="text" placeholder='Text area' onChange={handleEmailChange}/>
+            <input type="text" placeholder='Text area' onChange={handleTextChange}/>
             <button type='submit' >Add</button>
         </form>
         </>
