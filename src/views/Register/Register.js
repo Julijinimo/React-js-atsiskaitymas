@@ -7,7 +7,8 @@ const Register = ({ onRegister }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [registerError, setRegisterError] = useState('');
-    // const [success, successMessage] = useState('');
+    const [registrationSuccessful, setRegistrationMessage] = useState('');
+    
 
 
     // const navigate = useNavigate();
@@ -32,7 +33,7 @@ const Register = ({ onRegister }) => {
         if (data.err) {
           setRegisterError(data.err);
         } else {
-          // successMessage(response.status)
+          setRegistrationMessage(data.lastID)
         }})}
 
         const handleEmailChange = (e) => setEmail(e.target.value);
@@ -42,8 +43,7 @@ const Register = ({ onRegister }) => {
     return (
         <>
         <Navigation />
-        {/* {success && <h2>succesful registration</h2>} */}
-        {registerError && <h2>Error: {registerError}</h2>}
+        {registerError && <h2 className='Error'>Error: {registerError}!</h2>}
         <h1>
             Register Page
         </h1>
@@ -52,7 +52,7 @@ const Register = ({ onRegister }) => {
             <input type="password" placeholder='Password' onChange={handlePasswordChange}/>
             <button type='submit' >Register</button>
         </form>
-        <h3>After succesful registration you will be automatically redirected to login page</h3>
+        {registrationSuccessful ? <h3>Registration successful, please proceed to login page!</h3> : ''}
         </>
         
     )

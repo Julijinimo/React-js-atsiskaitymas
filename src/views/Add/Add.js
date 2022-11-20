@@ -1,16 +1,14 @@
 import { useState } from 'react';
 import { BASE_URL } from '../../utils/constants'
 
-const Add = ({ onRegister }) => {
+const Add = ({ onAdd }) => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [registerError, setRegisterError] = useState('');
 
 
     const handleRegister = (e) => {
       e.preventDefault();
-        onRegister(email);
-        onRegister(password);
+        onAdd(email);
       fetch(BASE_URL + '/auth/register', {
         method: 'POST',
         headers: {
@@ -18,7 +16,6 @@ const Add = ({ onRegister }) => {
         },
         body: JSON.stringify({
           email: email, 
-          password: password,
         })
       })
       .then(res => res.json())
@@ -31,7 +28,6 @@ const Add = ({ onRegister }) => {
         }})}
 
         const handleEmailChange = (e) => setEmail(e.target.value);
-        const handlePasswordChange = (e) => setPassword(e.target.value);
 
 
     return (
@@ -41,8 +37,8 @@ const Add = ({ onRegister }) => {
             Add Page
         </h1>
         <form onSubmit={handleRegister}>
-            <input type="email" placeholder='Email' onChange={handleEmailChange}/>
-            <input type="password" placeholder='Password' onChange={handlePasswordChange}/>
+            <label>Input text</label> <br></br>
+            <input type="text" placeholder='Text area' onChange={handleEmailChange}/>
             <button type='submit' >Add</button>
         </form>
         </>

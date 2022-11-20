@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { Navigation } from '../../components/Navigation/Navigation';
 import { BASE_URL } from '../../utils/constants'
 import { useNavigate } from 'react-router-dom';
+import './login.css'
 
 const Login = ({ onLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [registerError, setRegisterError] = useState('');
+    const [loginError, setLoginError] = useState('');
 
     const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ const Login = ({ onLogin }) => {
       .then(data => {
         console.log(data);
         if (data.err) {
-          setRegisterError(data.err);
+          setLoginError(data.err);
         } else {
           localStorage.setItem("token", data.token);
           navigate('/home');
@@ -41,7 +42,7 @@ const Login = ({ onLogin }) => {
     return (
         <>
         <Navigation />
-        {registerError && <h2 className='erroras'>Error: {registerError}</h2>}
+          {loginError && <h2 className='Error'>Error: {loginError}!</h2>}
         <h1>
             Login Page
         </h1>
