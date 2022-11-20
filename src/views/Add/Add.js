@@ -2,26 +2,26 @@ import { useState } from 'react';
 import { BASE_URL } from '../../utils/constants'
 
 const Add = ({ onAdd }) => {
-    const [token, setAdd] = useState('');
+    const [add, setAdd] = useState([]);
     const [addError, setAddError] = useState('');
     const token = localStorage.getItem("token");
 
 
     const handleAdd = (e) => {
       e.preventDefault();
-        // onAdd(token);
-      fetch(BASE_URL + '/auth/register', {
+      fetch(BASE_URL + '/content/skills', {
         method: 'POST',
         headers: {
-          'Content-type': 'application/json'
+          'Content-type': 'application/json',
+          Authorization: 'Bearer ' + token,
         },
-        body: JSON.stringify({
-          token: token, 
-        })
+        body: JSON.stringify(
+          [add],
+        )
       })
       .then(res => res.json())
       .then(data => {
-        // console.log(data);
+        // console.log(Authorization);
         if (data.err) {
           setAddError(data.err);
         } else {
