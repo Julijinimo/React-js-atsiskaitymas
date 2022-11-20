@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { Navigation } from '../../components/Navigation/Navigation';
 import { BASE_URL } from '../../utils/constants'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const Register = ({ onRegister }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [registerError, setRegisterError] = useState('');
+    const [registrationSuccessful, setRegistrationMessage] = useState('');
+    
 
-    const navigate = useNavigate();
+
+    // const navigate = useNavigate();
 
     const handleRegister = (e) => {
       e.preventDefault();
@@ -26,12 +29,11 @@ const Register = ({ onRegister }) => {
       })
       .then(res => res.json())
       .then(data => {
-        // console.log(data);
+        console.log(data);
         if (data.err) {
           setRegisterError(data.err);
         } else {
-          localStorage.setItem("token", data.tokenValue);
-          navigate('/login');
+          setRegistrationMessage(data.lastID)
         }})}
 
         const handleEmailChange = (e) => setEmail(e.target.value);
@@ -41,7 +43,7 @@ const Register = ({ onRegister }) => {
     return (
         <>
         <Navigation />
-        {registerError && <h2>Error: {registerError}</h2>}
+        {registerError && <h2 className='Error'>Error: {registerError}!</h2>}
         <h1>
             Register Page
         </h1>
@@ -50,7 +52,7 @@ const Register = ({ onRegister }) => {
             <input type="password" placeholder='Password' onChange={handlePasswordChange}/>
             <button type='submit' >Register</button>
         </form>
-        <h3>After succesful registration you will be automatically rerouted to login page</h3>
+        {registrationSuccessful ? <h3>Registration successful, please proceed to login page!</h3> : ''}
         </>
         
     )

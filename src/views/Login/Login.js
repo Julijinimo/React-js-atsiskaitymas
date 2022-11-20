@@ -2,18 +2,19 @@ import { useState } from 'react';
 import { Navigation } from '../../components/Navigation/Navigation';
 import { BASE_URL } from '../../utils/constants'
 import { useNavigate } from 'react-router-dom';
+import './login.css'
 
 const Login = ({ onLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [registerError, setRegisterError] = useState('');
+    const [loginError, setLoginError] = useState('');
 
     const navigate = useNavigate();
 
-    const handleRegister = (e) => {
+    const handleLogin = (e) => {
       e.preventDefault();
-      onLogin(email);
-      onLogin(password);
+        onLogin(email);
+        onLogin(password);
       fetch(BASE_URL + '/auth/login', {
         method: 'POST',
         headers: {
@@ -28,10 +29,10 @@ const Login = ({ onLogin }) => {
       .then(data => {
         console.log(data);
         if (data.err) {
-          setRegisterError(data.err);
+          setLoginError(data.err);
         } else {
           localStorage.setItem("token", data.token);
-          navigate('/');
+          navigate('/home');
         }})}
 
         const handleEmailChange = (e) => setEmail(e.target.value);
@@ -41,11 +42,11 @@ const Login = ({ onLogin }) => {
     return (
         <>
         <Navigation />
-        {registerError && <h2 className='erroras'>Error: {registerError}</h2>}
+          {loginError && <h2 className='Error'>Error: {loginError}!</h2>}
         <h1>
             Login Page
         </h1>
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleLogin}>
             <input type="email" placeholder='Email' onChange={handleEmailChange}/>
             <input type="password" placeholder='Password' onChange={handlePasswordChange}/>
             <button type='submit' >Login</button>

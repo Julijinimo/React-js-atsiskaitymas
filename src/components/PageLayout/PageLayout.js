@@ -11,7 +11,6 @@ export const PageLayout = ({ email, onLogout }) => {
     return (
         <div>
             <Navigation onLogout={onLogout}/>
-            PageLayout
             <Outlet />
         </div>
     );
