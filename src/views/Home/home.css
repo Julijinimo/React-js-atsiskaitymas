@@ -13,3 +13,8 @@
     margin-bottom: 10px;
     width: 25%;
   }
+
+  .Error {
+    color: black;
+    background-color: red;
+}

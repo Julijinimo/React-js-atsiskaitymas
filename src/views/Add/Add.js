@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { BASE_URL } from '../../utils/constants'
+import './add.css';
 
-const Add = ({ onAdd }) => {
-    // const [add, setAdd] = useState([]);
+const Add = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    // const [skills, setSkills] = useState('');
     const [addError, setAddError] = useState('');
     const [addSuccess, setAddSuccess] = useState('');
     const token = localStorage.getItem("token");
@@ -40,7 +39,7 @@ const Add = ({ onAdd }) => {
 
     return (
         <>
-        {addError && <h2>Error: {addError}</h2>}
+        {addError && <h2 className='Error'>Error: {addError}</h2>}
         {addSuccess && <h2>Success: {addSuccess}!</h2>}
         <h1>
             Add Page
