@@ -21,10 +21,9 @@ const Home = () => {
             })
             .then(res => res.json())
             .then(data => {
-            console.log(data);
-            setPosts(data);
+                setPosts(data);
             if (data.err) {
-            setGetError(data);
+                setGetError(data.err);
             } else {
                 
             }
@@ -33,25 +32,26 @@ const Home = () => {
     }, []);
     
 
-            return (
-                <>
-                    {getError && <h2 className='erroras'>Error: {getError}</h2>}
-
-                    <div>
-                        <h1 className='home' >Here you can find your added skills</h1>
-                    </div>
-                    <div className='posts-wrapper'>
-                        {posts.map(data => 
-                        <>
-                            <div className='post' key={Math.random}>
-                                <h2>Skill: {data.title}</h2> 
-                                <p>Skill description: {data.description}</p>
-                            </div>
-                        </>
-                        )}
-                    </div>
-                </>    
-            )
-        };            
+    return (
+        <div className='home-wrapper'>
+            <h1 className='home' >Here you can find your added skills</h1>
+            <>
+                {getError && <h2 className='Error'>Error: {getError}</h2>}
+                <div className='posts-wrapper'>
+                    {posts.map(data => 
+                    <>
+                        <div className='post' key={Math.random}>
+                            <h2>Skill: {data.title}</h2> 
+                            <p>Skill description: {data.description}</p>
+                        </div>
+                    </>
+                    )}
+                </div>
+            </> 
+        </div>
+            
+               
+    )
+};            
 
 export default Home;
