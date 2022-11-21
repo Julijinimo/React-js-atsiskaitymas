@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Navigation } from '../../components/Navigation/Navigation';
 import { BASE_URL } from '../../utils/constants'
-// import { useNavigate } from 'react-router-dom';
 
 const Register = ({ onRegister }) => {
     const [email, setEmail] = useState('');
@@ -9,9 +8,6 @@ const Register = ({ onRegister }) => {
     const [registerError, setRegisterError] = useState('');
     const [registrationSuccessful, setRegistrationMessage] = useState('');
     
-
-
-    // const navigate = useNavigate();
 
     const handleRegister = (e) => {
       e.preventDefault();
@@ -59,37 +55,3 @@ const Register = ({ onRegister }) => {
 };
 
 export default Register
-
-
-// // const [registerError, setRegisterError] = useState('');
-
-// //   const handleLogin = (e) => {
-// //     e.preventDefault();
-// //     fetch(`${BASE_URL}/auth/register`, {
-// //       method: 'POST',
-// //       headers: {
-// //         'Content-type': 'application/json'
-// //       },
-// //       body: JSON.stringify({
-// //         email: 'test123@gmail.com', // cia reikes padaryti kad imtu info is inputo
-// //         password: 'test123' // cia reikes padaryti, kad imtu info is inputo
-// //       })
-// //     })
-// // }
-
-// // return (
-// //     <div>
-// //         <Navigation>
-            
-// //         </Navigation>
-// //         {registerError && <h3>{registerError}</h3>}
-// //         <form onSubmit={handleLogin}>
-// //         <input type="email" placeholder='Email'/>
-// //         <input type="password" placeholder='Password'/>
-// //         <button type='submit' >Register</button>
-// //         </form>
-// //     </div>
-    
-// // )
-// }
-

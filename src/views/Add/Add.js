@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { BASE_URL } from '../../utils/constants'
 
 const Add = ({ onAdd }) => {
-    const [add, setAdd] = useState([]);
-    const [skills, setSkills] = useState('');
+    // const [add, setAdd] = useState([]);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    // const [skills, setSkills] = useState('');
     const [addError, setAddError] = useState('');
+    const [addSuccess, setAddSuccess] = useState('');
     const token = localStorage.getItem("token");
 
 
@@ -17,38 +20,36 @@ const Add = ({ onAdd }) => {
           Authorization: 'Bearer ' + token,
         },
         body: JSON.stringify({
-          
+            title: title,
+            description: description,
         }
         )
       })
       .then(res => res.json())
       .then(data => {
-        // console.log(Authorization);
+        console.log(data)
         if (data.err) {
           setAddError(data.err);
         } else {
- 
+          setAddSuccess(data.msg);
         }})}
 
-        const handleTextChange = (e) => setSkills(e.target.value);
+        const handleTitleChange = (e) => setTitle(e.target.value);
+        const handleDescriptionChange = (e) => setDescription(e.target.value);
 
 
     return (
         <>
         {addError && <h2>Error: {addError}</h2>}
+        {addSuccess && <h2>Success: {addSuccess}!</h2>}
         <h1>
             Add Page
         </h1>
         <form onSubmit={handleAdd}>
             <label>Input text</label> <br></br>
-            <input type="text" placeholder='Text area' onChange={handleTextChange}/>
-            <button type='submit' onClick={() => {
-              setSkills('')
-              setAdd([
-                ...add,
-                [skills]
-              ])
-            }} >Add</button>
+            <input type="text" placeholder='Title' onChange={handleTitleChange}/>
+            <input type="text" placeholder='Description' onChange={handleDescriptionChange}/>
+            <button type='submit'>Add</button>
         </form>
         </>
         
