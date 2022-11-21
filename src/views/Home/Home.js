@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { BASE_URL } from '../../utils/constants';
+// import { InfinitySpin } from 'react-loader-spinner';
 import './home.css';
 
 const Home = () => {
 
     const [getError, setGetError] = useState('');
     const [posts, setPosts] = useState([]);
-    const [getMessage, setGetMessage] = useState('');
+
+
 
             useEffect(() => {
             const token = localStorage.getItem("token");
@@ -24,7 +26,7 @@ const Home = () => {
             if (data.err) {
             setGetError(data);
             } else {
-            setGetMessage(data.response)
+                
             }
         }
         )
@@ -34,8 +36,7 @@ const Home = () => {
             return (
                 <>
                     {getError && <h2 className='erroras'>Error: {getError}</h2>}
-                    {getMessage && <h2 className='erroras'>Error: {getMessage}</h2>}
-                    
+
                     <div>
                         <h1 className='home' >Here you can find your added skills</h1>
                     </div>
